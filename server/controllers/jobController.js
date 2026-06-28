@@ -1,32 +1,88 @@
-let jobs = [];
+const { PrismaClient } = require("@prisma/client");
 
-const getJobs = (req, res) => {
+const prisma = new PrismaClient();
+
+// GET ALL JOBS
+const getJobs = async (req, res) => {
+  try {
+    const jobs = await prisma.job.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
     res.json(jobs);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch jobs" });
+  }
 };
 
-const createJob = (req, res) => {
-    const job = {
-        id: Date.now(),
-        ...req.body,
-    };
+// CREATE JOB
+const createJob = async (req, res) => {
+  try {
+    const { company, title, location, status } = req.body;
 
-    jobs.push(job);
+    const job = await prisma.job.create({
+      data: {
+        company,
+        title,
+        location,
+        status,
+      },
+    });
 
     res.status(201).json(job);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to create job" });
+  }
 };
+const updateJob = async (req, res) => {
+  try {
+    const { company, title, location, status } = req.body;
 
-const deleteJob = (req, res) => {
-    const id = Number(req.params.id);
+    const job = await prisma.job.update({
+      where: {
+        id: Number(req.params.id),
+      },
+      data: {
+        company,
+        title,
+        location,
+        status,
+      },
+    });
 
-    jobs = jobs.filter(job => job.id !== id);
+    res.json(job);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Failed to update job",
+    });
+  }
+};
+// DELETE JOB
+const deleteJob = async (req, res) => {
+  try {
+    await prisma.job.delete({
+      where: {
+        id: Number(req.params.id),
+      },
+    });
 
     res.json({
-        message: "Job deleted successfully"
+      message: "Job deleted successfully",
     });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to delete job" });
+  }
 };
 
 module.exports = {
-    getJobs,
-    createJob,
-    deleteJob,
+  getJobs,
+  createJob,
+  updateJob,
+  deleteJob,
 };
