@@ -1,0 +1,27 @@
+# Node Modules
+node_modules/
+client/node_modules/
+server/node_modules/
+extension/node_modules/
+
+# Environment Variables
+.env
+server/.env
+client/.env
+
+# Build Files
+dist/
+build/
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Prisma
+server/prisma/dev.db
