@@ -1,4 +1,4 @@
-const API = "http://localhost:5000/jobs";
+const API = `${import.meta.env.VITE_API_URL}/jobs`;
 
 function getAuthHeaders() {
   const token = localStorage.getItem("token");
