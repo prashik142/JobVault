@@ -83,27 +83,7 @@ https://github.com/prashik142/JobVault
 - Frontend → Vercel
 - Backend → Render
 - Database → Neon PostgreSQL
-
----
-
-# 📸 Screenshots
-
-## Dashboard
-
-> *(Add screenshot here)*
-
----
-
-## Chrome Extension Popup
-
-> *(Add screenshot here)*
-
----
-
-## Internship Save Modal
-
-> *(Add screenshot here)*
-
+  
 ---
 
 # 📂 Project Structure
@@ -297,10 +277,6 @@ The extension is now ready to use.
 GitHub
 
 https://github.com/prashik142
-
-LinkedIn
-
-*(Add your LinkedIn profile here)*
 
 ---
 
